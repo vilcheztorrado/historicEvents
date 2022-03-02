@@ -68,7 +68,6 @@ export class EventListComponent implements OnInit, OnDestroy {
 			}
 			return 0;
 		  });
-		  console.log(this.currentMergedEvents);
 		  this.dataSource.data = this.currentMergedEvents;
 	}
 
