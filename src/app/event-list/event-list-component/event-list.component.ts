@@ -59,15 +59,16 @@ export class EventListComponent implements OnInit, OnDestroy {
 		let deaths = eventItem.data['Deaths'].map(item => {item.type = 'death'; return item});
 		let events = eventItem.data['Events'].map(item => {item.type = 'event'; return item});
 		this.currentMergedEvents = births.concat(deaths).concat(events);
-		this.currentMergedEvents.sort(function (a, b) {
-			if (a.year > b.year) {
+		this.currentMergedEvents = this.currentMergedEvents.sort(function (a, b) {
+			if (a.year < b.year) {
 			  return 1;
 			}
-			if (a.year < b.year) {
+			if (a.year > b.year) {
 			  return -1;
 			}
 			return 0;
 		  });
+		  console.log(this.currentMergedEvents);
 		  this.dataSource.data = this.currentMergedEvents;
 	}
 
@@ -80,7 +81,7 @@ export class EventListComponent implements OnInit, OnDestroy {
 	}
 
 	openDetail(links: Array<any>) {
-		let dialogRef = this.dialog.open(EventDetailComponent, {
+		this.dialog.open(EventDetailComponent, {
             width: '25vw',
             data: links
         });
